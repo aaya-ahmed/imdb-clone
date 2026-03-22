@@ -22,6 +22,7 @@ export default function LightnessModeBtn() {
   useEffect(() => {
     const theme = localStorage.getItem("theme");
   if (theme) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setTheme(theme);
     } else {
       const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
