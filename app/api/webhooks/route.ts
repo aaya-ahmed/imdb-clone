@@ -23,7 +23,7 @@ export async function POST(req: NextRequest) {
       if (user && eventType === "user.created") {
         try {
           const client = await clerkClient();
-          client.users.updateUserMetadata(id ?? "", {
+          await client.users.updateUserMetadata(id ?? "", {
             publicMetadata: {
               appUserId: user._id.toString(),
             },
