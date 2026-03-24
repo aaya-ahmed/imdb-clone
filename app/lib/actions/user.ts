@@ -26,7 +26,7 @@ export const createOrUpdateUser = async (
     );
     return user;
   } catch (error) {
-    console.log("Error: Could not create or update user:", error);
+    console.log("Error: Could not connected or create or update user:", error);
   }
 };
 export const deleteUser = async (id: string) => {

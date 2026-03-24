@@ -5,9 +5,6 @@ import { NextRequest } from "next/server";
 
 export async function POST(req: NextRequest) {
   try {
-    // Temporarily check what env vars are available
-    console.log("SIGNING_SECRET exists:", !!process.env.SIGNING_SECRET);
-    console.log("WEBHOOK_SECRET exists:", !!process.env.WEBHOOK_SECRET);
     const evt = await verifyWebhook(req);
     const { id } = evt.data;
     const eventType = evt.type;
@@ -21,7 +18,11 @@ export async function POST(req: NextRequest) {
         image_url,
         email_addresses,
       );
-      console.log("Received user.created or user.updated event:",user);
+      console.log("Received user.created or user.updated event:",id,
+        first_name,
+        last_name,
+        image_url,
+        email_addresses);
       if (user && eventType === "user.created") {
         try {
           const client = await clerkClient();
@@ -31,8 +32,6 @@ export async function POST(req: NextRequest) {
             },
           });
         } catch (e) {
-          console.log("Received user.created or user.updated event:", evt, e);
-
           return new Response("Error updating user metadata", { status: 400 });
         }
       }
@@ -50,7 +49,6 @@ export async function POST(req: NextRequest) {
     }
     return new Response("Webhook received", { status: 200 });
   } catch (err) {
-    console.log("Error verifying webhook:", err);
     return new Response("Error verifying webhook", { status: 400 });
   }
 }
