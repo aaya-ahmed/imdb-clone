@@ -5,6 +5,9 @@ import { NextRequest } from "next/server";
 
 export async function POST(req: NextRequest) {
   try {
+    // Temporarily check what env vars are available
+    console.log("SIGNING_SECRET exists:", !!process.env.SIGNING_SECRET);
+    console.log("WEBHOOK_SECRET exists:", !!process.env.WEBHOOK_SECRET);
     const evt = await verifyWebhook(req);
     const { id } = evt.data;
     const eventType = evt.type;
