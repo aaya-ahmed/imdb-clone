@@ -8,10 +8,16 @@ export async function POST(req: NextRequest) {
     const evt = await verifyWebhook(req);
     const { id } = evt.data;
     const eventType = evt.type;
+    console.log("Received user.created or user.updated event:", evt, evt.data);
+
     if (eventType === "user.created" || eventType === "user.updated") {
       // Handle user created or updated event
       const { first_name, last_name, image_url, email_addresses } = evt.data;
-      console.log("Received user.created or user.updated event:", evt,evt.data);
+      console.log(
+        "Received user.created or user.updated event:",
+        evt,
+        evt.data,
+      );
       const user = await createOrUpdateUser(
         id,
         first_name,
@@ -19,7 +25,11 @@ export async function POST(req: NextRequest) {
         image_url,
         email_addresses,
       );
-      console.log("Received user.created or user.updated event:", evt,evt.data);
+      console.log(
+        "Received user.created or user.updated event:",
+        evt,
+        evt.data,
+      );
       if (user && eventType === "user.created") {
         try {
           const client = await clerkClient();
@@ -29,7 +39,7 @@ export async function POST(req: NextRequest) {
             },
           });
         } catch (e) {
-      console.log("Received user.created or user.updated event:", evt,e);
+          console.log("Received user.created or user.updated event:", evt, e);
 
           return new Response("Error updating user metadata", { status: 400 });
         }
