@@ -30,8 +30,9 @@ export async function PUT(req: Request) {
       return new Response(JSON.stringify(updatedUser), { status: 200 });
     }
     return new Response("Invalid data", { status: 400 });
-  } catch (e) {
-    return new Response((e as Error).message, { status: 400 });
+  } catch (e:any) {
+    console.log("Fav error:", e);
+    return new Response(e, { status: 400 });
   }
 }
 export async function GET() {
@@ -43,7 +44,8 @@ export async function GET() {
       return new Response("User not found", { status: 404 });
     }
     return new Response(JSON.stringify(user.favs??[]), { status: 200 });
-  } catch (e) {
-    return new Response((e as Error).message, { status: 400 });
+  } catch (e:any) {
+    console.log("Fav error:", e);
+    return new Response(e, { status: 400 });
   }
 }
