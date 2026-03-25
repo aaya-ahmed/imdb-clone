@@ -63,6 +63,7 @@ export default async function Movie({
               <span className="font-semibold mr-1">Rating: </span>
               {data.vote_average}👍
             </p>
+            
             <AddToFavourite data={data} />
           </div>
         </div>
