@@ -18,10 +18,10 @@ export async function PUT(req: Request) {
     } else if (code == 404) {
       return new Response("User not found", { status: 404 });
     }
+    console.log("Data received in API route:", code,user);
     const client = await clerkClient();
     const data = await req.json();
     if (data) {
-      console.log("Data received in API route:", data,user);
       const updatedfavs = await AddToFavourite(data as FavData, user);
       const updatedUser = await client.users.updateUserMetadata(user.id, {
         publicMetadata: {
