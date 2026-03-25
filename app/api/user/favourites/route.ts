@@ -7,12 +7,12 @@ async function getUser() {
   if (!user) {
     return { user: null, code: 401 };
   }
-  const id: string = (user.publicMetadata?.mongoUserId ?? "").toString();
+  const id: any = user.publicMetadata?.mongoUserId ?? "";
   return getUserById(id);
 }
 export async function PUT(req: Request) {
-  const { user, code } = await getUser();
   try {
+    const { user, code } = await getUser();
     if (code == 401) {
       return new Response("Unauthorized", { status: 401 });
     } else if (code == 404) {
@@ -31,7 +31,6 @@ export async function PUT(req: Request) {
     }
     return new Response("Invalid data", { status: 400 });
   } catch (e:any) {
-    console.log("Data received in API route:", code,user);
     console.log("Fav error2:", e);
     return new Response(e, { status: 400 });
   }

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import User from "../model/user";
 import dbConnect from "../mongodb/mongodb";
-export async function getUserById(id:string) {
+export async function getUserById(id:any) {
   await dbConnect();
   const existingUser = await User.findById(id);
   if (!existingUser) {
