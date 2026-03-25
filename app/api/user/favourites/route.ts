@@ -31,7 +31,7 @@ export async function PUT(req: Request) {
     }
     return new Response("Invalid data", { status: 400 });
   } catch (e) {
-    return new Response("Error updating user metadata", { status: 400 });
+    return new Response((e as Error).message, { status: 400 });
   }
 }
 export async function GET() {
@@ -44,6 +44,6 @@ export async function GET() {
     }
     return new Response(JSON.stringify(user.favs??[]), { status: 200 });
   } catch (e) {
-    return new Response("Error updating user metadata", { status: 400 });
+    return new Response((e as Error).message, { status: 400 });
   }
 }
