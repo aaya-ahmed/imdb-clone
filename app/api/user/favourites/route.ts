@@ -11,14 +11,13 @@ async function getUser() {
   return getUserById(id);
 }
 export async function PUT(req: Request) {
+  const { user, code } = await getUser();
   try {
-    const { user, code } = await getUser();
     if (code == 401) {
       return new Response("Unauthorized", { status: 401 });
     } else if (code == 404) {
       return new Response("User not found", { status: 404 });
     }
-    console.log("Data received in API route:", code,user);
     const client = await clerkClient();
     const data = await req.json();
     if (data) {
@@ -32,6 +31,7 @@ export async function PUT(req: Request) {
     }
     return new Response("Invalid data", { status: 400 });
   } catch (e:any) {
+    console.log("Data received in API route:", code,user);
     console.log("Fav error2:", e);
     return new Response(e, { status: 400 });
   }
