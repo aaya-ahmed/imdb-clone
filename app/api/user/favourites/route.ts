@@ -48,7 +48,7 @@ export async function GET() {
   }
 }
 export async function DELETE(req: Request,
-  { params }: { params: { id: string } }) {
+  { params }: { params: Promise<{ id: string }> }) {
     try {
     const { user, code } = await getUser();
     if (code == 401) {
@@ -57,7 +57,7 @@ export async function DELETE(req: Request,
       return new Response("User not found", { status: 404 });
     }
     const client = await clerkClient();
-    const movieId = params.id;
+    const movieId = (await params).id;
     if (movieId) {
       const updatedfavs = await deleteFavourite(movieId,user);
       const updatedUser = await client.users.updateUserMetadata(user.id, {
