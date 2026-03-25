@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { clerkClient, currentUser } from "@clerk/nextjs/server";
 import User from "../model/user";
 import dbConnect from "../mongodb/mongodb";
 export type FavData = {
@@ -35,6 +34,7 @@ export const AddToFavourite = async (data: FavData,existingUser:any) => {
     );
     return updatedfavs;
   } catch (error: any) {
+    console.error("Fav error1:", error);
     throw error;
   }
 };

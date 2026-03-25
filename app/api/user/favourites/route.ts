@@ -21,6 +21,7 @@ export async function PUT(req: Request) {
     const client = await clerkClient();
     const data = await req.json();
     if (data) {
+      console.log("Data received in API route:", data,user);
       const updatedfavs = await AddToFavourite(data as FavData, user);
       const updatedUser = await client.users.updateUserMetadata(user.id, {
         publicMetadata: {
@@ -31,13 +32,14 @@ export async function PUT(req: Request) {
     }
     return new Response("Invalid data", { status: 400 });
   } catch (e:any) {
-    console.log("Fav error:", e);
+    console.log("Fav error2:", e);
     return new Response(e, { status: 400 });
   }
 }
 export async function GET() {
   try {
     const { user, code } = await getUser();
+    console.log("User fetched in GET route:", user, code);
     if (code == 401) {
       return new Response("Unauthorized", { status: 401 });
     } else if (code == 404) {
