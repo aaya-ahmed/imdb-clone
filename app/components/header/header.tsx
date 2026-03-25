@@ -23,6 +23,9 @@ export default function Header() {
           </Show>
           <Show when="signed-in">
             <UserButton />
+            <li className="hidden sm:block hover:bg-orange-300 hover:rounded-lg py-1 px-2">
+              <Link href={"/favourites"}>Favourites</Link>
+            </li>
           </Show>
         </li>
         <li className="hidden sm:block hover:bg-orange-300 hover:rounded-lg py-1 px-2">
