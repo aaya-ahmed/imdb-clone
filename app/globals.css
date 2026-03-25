@@ -1,33 +1,48 @@
 @import "tailwindcss";
+@theme {
+  --color-navbar-background: var(--navbar-background);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-border: var(--border);
+  --color-primary: var(--primary);
+  --color-text: var(--text);
+  --color-clerk-color-foreground: var(--text);
+  --color-clerk-color-shadow: var(--clerk-color-shadow);
+  --color-clerk-color-border: var(--clerk-color-border);
+  --color-clerk-color-neutral: var(--clerk-color-neutral);
+  --color-navbar-background: var(--navbar-background);
+  --shadow-card: var(--shadow-card);
+}
 :root {
   --background: #ffff;
   --foreground: #000;
-
   --card: #f5f5f5;
   --border: #dcdcdc;
-
   --primary: #3b82f6;
   --text: #000;
   --clerk-color-foreground: var(--text);
   --clerk-color-shadow: #000;
   --clerk-color-border: #000;
   --clerk-color-neutral: #000;
+  --navbar-background: #fef3c7;
+  --shadow-card: 4px 4px 10px -4px rgba(0, 0, 0, 0.505);
 }
 
 /* dark mode */
 .dark {
   --background: #000;
   --foreground: #ededed;
-
   --card: #18181b;
   --border: #3f3f46;
-
   --primary: #60a5fa;
   --text: #fff;
   --clerk-color-foreground: var(--text);
   --clerk-color-shadow: #fff;
   --clerk-color-border: #fff;
   --clerk-color-neutral: #fff;
+  --navbar-background: #4b5563;
+  --shadow-card: 4px 4px 10px -4px rgba(255, 255, 255, 0.497);
 }
 body {
   background-color: var(--background);
@@ -36,6 +51,10 @@ body {
     background-color 0.3s,
     color 0.3s;
 }
+/* global.css */
+/* .bg-navbarBackground {
+  background-color: var(--navbar-background);
+} */
 /*
 @theme inline {
   --color-background: var(--background);

@@ -4,6 +4,8 @@ import "./globals.css";
 import Header from "./components/header/header";
 import ThemeProvider from "./providers/theme-provider";
 import { ClerkProvider } from "@clerk/nextjs";
+import Navbar from "./components/navbar/navbar";
+import Search from "./components/search/search";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,19 +28,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider
-      appearance={{
-        variables: {
-          colorPrimary: "var(--primary)",
-          colorBackground: "var(--background)",
-          colorText: "var(--text)"
-        },
-         elements: {
-          card: {
-            backgroundColor: "var(--background)",
-          }}
-      }}
-    >
+    <ClerkProvider>
       <html
         lang="en"
         className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
@@ -46,8 +36,12 @@ export default function RootLayout({
         <body className="min-h-full flex flex-col">
           <ThemeProvider>
             <>
+              <div className="max-w-6xl w-full mx-auto">
               <Header />
+                <Navbar />
+                <Search />
               {children}
+              </div>
             </>
           </ThemeProvider>
         </body>

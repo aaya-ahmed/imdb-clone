@@ -4,7 +4,7 @@ import { Show, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
 
 export default function Header() {
   return (
-    <div className="flex justify-between items-center p-3 max-w-6xl w-full mx-auto">
+    <div className="flex justify-between items-center p-3">
       <ul className="flex gap-4">
         <li>
           <Show when="signed-out">

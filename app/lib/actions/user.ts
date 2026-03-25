@@ -1,7 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import User from "../model/user";
 import dbConnect from "../mongodb/mongodb";
-
+export async function getUserById(id:string) {
+  await dbConnect();
+  const existingUser = await User.findById(id);
+  if (!existingUser) {
+    return { user: null, code: 404 };
+  }
+  return { user: existingUser, code: 200 };
+}
 export const createOrUpdateUser = async (
   id: string | undefined,
   first_name: string|null,
@@ -11,7 +18,6 @@ export const createOrUpdateUser = async (
 ) => {
   try {
     await dbConnect();
-    console.log("db connected in createOrUpdateUser");
     const user = await User.findOneAndUpdate(
       { clerkId: id },
       {
